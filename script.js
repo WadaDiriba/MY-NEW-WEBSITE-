@@ -107,81 +107,87 @@ particlesJS('particles-js', {
 const cursorDot = document.getElementById('cursor-dot');
 const cursorOutline = document.getElementById('cursor-outline');
 
-document.addEventListener('mousemove', (e) => {
-    cursorDot.style.left = e.clientX + 'px';
-    cursorDot.style.top = e.clientY + 'px';
-    
-    cursorOutline.style.left = e.clientX + 'px';
-    cursorOutline.style.top = e.clientY + 'px';
-});
-
-document.addEventListener('mousedown', () => {
-    cursorDot.style.transform = 'translate(-50%, -50%) scale(0.5)';
-    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.2)';
-});
-
-document.addEventListener('mouseup', () => {
-    cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
-    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
-});
-
-// Add hover effects for interactive elements
-const interactiveElements = document.querySelectorAll('a, button, .btn, .nav-link, .service-card, .portfolio-item, .category');
-interactiveElements.forEach(element => {
-    element.addEventListener('mouseenter', () => {
-        cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
-        cursorOutline.style.opacity = '0.8';
+if (cursorDot && cursorOutline) {
+    document.addEventListener('mousemove', (e) => {
+        cursorDot.style.left = e.clientX + 'px';
+        cursorDot.style.top = e.clientY + 'px';
+        
+        cursorOutline.style.left = e.clientX + 'px';
+        cursorOutline.style.top = e.clientY + 'px';
     });
-    
-    element.addEventListener('mouseleave', () => {
+
+    document.addEventListener('mousedown', () => {
+        cursorDot.style.transform = 'translate(-50%, -50%) scale(0.5)';
+        cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.2)';
+    });
+
+    document.addEventListener('mouseup', () => {
+        cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
         cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
-        cursorOutline.style.opacity = '0.5';
     });
-});
+
+    // Add hover effects for interactive elements
+    const interactiveElements = document.querySelectorAll('a, button, .btn, .nav-link, .service-card, .portfolio-item, .category');
+    interactiveElements.forEach(element => {
+        element.addEventListener('mouseenter', () => {
+            cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
+            cursorOutline.style.opacity = '0.8';
+        });
+        
+        element.addEventListener('mouseleave', () => {
+            cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
+            cursorOutline.style.opacity = '0.5';
+        });
+    });
+}
 
 // Mobile Menu Toggle
 const menuToggle = document.getElementById('menu-toggle');
 const navList = document.querySelector('.nav-list');
 
-menuToggle.addEventListener('click', () => {
-    menuToggle.classList.toggle('active');
-    navList.classList.toggle('active');
-});
-
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-        menuToggle.classList.remove('active');
-        navList.classList.remove('active');
+if (menuToggle && navList) {
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navList.classList.toggle('active');
     });
-});
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            navList.classList.remove('active');
+        });
+    });
+}
 
 // Theme Toggle
 const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
 
-// Check for saved theme preference or prefer-color-scheme
-const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-const currentTheme = localStorage.getItem('theme');
+if (themeToggle) {
+    // Check for saved theme preference or prefer-color-scheme
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    const currentTheme = localStorage.getItem('theme');
 
-if (currentTheme === 'light' || (!currentTheme && prefersDarkScheme.matches)) {
-    body.classList.add('light-theme');
-    themeToggle.innerHTML = '<i class="bx bx-sun"></i>';
-} else {
-    themeToggle.innerHTML = '<i class="bx bx-moon"></i>';
-}
-
-themeToggle.addEventListener('click', () => {
-    body.classList.toggle('light-theme');
-    
-    if (body.classList.contains('light-theme')) {
+    if (currentTheme === 'light' || (!currentTheme && prefersDarkScheme.matches)) {
+        body.classList.add('light-theme');
         themeToggle.innerHTML = '<i class="bx bx-sun"></i>';
-        localStorage.setItem('theme', 'light');
     } else {
         themeToggle.innerHTML = '<i class="bx bx-moon"></i>';
-        localStorage.setItem('theme', 'dark');
     }
-});
+
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('light-theme');
+        
+        if (body.classList.contains('light-theme')) {
+            themeToggle.innerHTML = '<i class="bx bx-sun"></i>';
+            localStorage.setItem('theme', 'light');
+        } else {
+            themeToggle.innerHTML = '<i class="bx bx-moon"></i>';
+            localStorage.setItem('theme', 'dark');
+        }
+    });
+}
 
 // Smooth Scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -222,56 +228,141 @@ window.addEventListener('scroll', () => {
 // Back to Top Button
 const backToTop = document.getElementById('backToTop');
 
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
-        backToTop.classList.add('show');
-    } else {
-        backToTop.classList.remove('show');
-    }
-});
-
-backToTop.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+if (backToTop) {
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTop.classList.add('show');
+        } else {
+            backToTop.classList.remove('show');
+        }
     });
-});
+
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
 
 // Skills Data
+// Skills Data - Updated with Mobile Databases
 const skillsData = {
     frontend: [
         { name: 'HTML/CSS', percentage: 85 },
-        { name: 'JavaScript', percentage: 75 },
-       
-       
+        { name: 'JavaScript', percentage: 80 },
+        { name: 'React', percentage: 75 },
+        { name: 'Vue.js', percentage: 70 },
+        { name: 'Bootstrap', percentage: 85 }
     ],
     mobile: [
         { name: 'Flutter', percentage: 85 },
+        { name: 'React Native', percentage: 80 },
         { name: 'Dart', percentage: 90 },
-        { name: 'Kotlin', percentage: 75 },
-       
+        { name: 'Kotlin', percentage: 70 },
+        { name: 'SQLite', percentage: 85 },
+        { name: 'Hive', percentage: 75 },
+        { name: 'Supabase', percentage: 80 },
+        { name: 'Room Database', percentage: 70 },
         { name: 'Firebase', percentage: 80 }
     ],
     backend: [
         { name: 'Node.js', percentage: 75 },
         { name: 'Python', percentage: 75 },
-        { name: 'MySQL', percentage: 70 },
-        
-        { name: 'REST APIs', percentage: 80 }
+        { name: 'MySQL', percentage: 80 },
+        { name: 'MongoDB', percentage: 70 },
+        { name: 'REST APIs', percentage: 85 },
+        { name: 'GraphQL', percentage: 65 }
     ],
     tools: [
         { name: 'Git', percentage: 85 },
         { name: 'Docker', percentage: 60 },
         { name: 'Figma', percentage: 75 },
         { name: 'VS Code', percentage: 90 },
-        { name: 'Postman', percentage: 80 }
+        { name: 'Postman', percentage: 80 },
+        { name: 'Android Studio', percentage: 85 },
+        { name: 'Xcode', percentage: 65 }
     ]
 };
+// Animate circular progress bars
+function animateCircularProgress() {
+    const graphItems = document.querySelectorAll('.graph-item');
+    
+    graphItems.forEach(item => {
+        const percentage = item.getAttribute('data-percentage');
+        const circle = item.querySelector('.graph-circle');
+        const percentageDisplay = item.querySelector('.graph-percentage');
+        
+        // Set CSS custom property for conic gradient
+        circle.style.setProperty('--progress', `${percentage}%`);
+        
+        // Animate percentage counter
+        let current = 0;
+        const duration = 2000;
+        const increment = percentage / (duration / 16);
+        
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= percentage) {
+                current = percentage;
+                clearInterval(timer);
+            }
+            percentageDisplay.textContent = Math.floor(current) + '%';
+        }, 16);
+    });
+}
+
+// Update skills display for circular progress
+function populateSkills(category) {
+    const container = document.getElementById(category);
+    const skills = skillsData[category];
+    
+    container.innerHTML = skills.map(skill => {
+        const level = getSkillLevel(skill.percentage);
+        return `
+            <div class="skill-item">
+                <div class="skill-progress-circle">
+                    <div class="skill-circle-bg" style="--progress: ${skill.percentage}%">
+                        <div class="skill-percentage">${skill.percentage}%</div>
+                    </div>
+                </div>
+                <div class="skill-name">${skill.name}</div>
+                <div class="skill-level">${level}</div>
+            </div>
+        `;
+    }).join('');
+}
+
+function getSkillLevel(percentage) {
+    if (percentage >= 90) return 'Expert';
+    if (percentage >= 80) return 'Advanced';
+    if (percentage >= 70) return 'Intermediate';
+    if (percentage >= 60) return 'Proficient';
+    return 'Beginner';
+}
+
+// Initialize circular animations when skills section is in view
+const skillsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateCircularProgress();
+            skillsObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.3 });
+
+// Observe skills section
+const skillsSection = document.querySelector('.skills');
+if (skillsSection) {
+    skillsObserver.observe(skillsSection);
+}
 
 // Initialize Skills
 function initializeSkills() {
     const categories = document.querySelectorAll('.category');
     const skillContents = document.querySelectorAll('.skill-category-content');
+    
+    if (categories.length === 0) return;
     
     categories.forEach(category => {
         category.addEventListener('click', () => {
@@ -283,7 +374,10 @@ function initializeSkills() {
             
             // Update active content
             skillContents.forEach(content => content.classList.remove('active'));
-            document.getElementById(categoryName).classList.add('active');
+            const targetContent = document.getElementById(categoryName);
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
             
             // Populate skills for this category
             populateSkills(categoryName);
@@ -296,7 +390,10 @@ function initializeSkills() {
 
 function populateSkills(category) {
     const container = document.getElementById(category);
+    if (!container) return;
+    
     const skills = skillsData[category];
+    if (!skills) return;
     
     container.innerHTML = skills.map(skill => `
         <div class="skill-item">
@@ -319,53 +416,43 @@ function animateSkillGraphs() {
         const percentage = item.getAttribute('data-percentage');
         const graphFill = item.querySelector('.graph-fill');
         
-        setTimeout(() => {
-            graphFill.style.width = `${percentage}%`;
-        }, 500);
+        if (graphFill) {
+            setTimeout(() => {
+                graphFill.style.width = `${percentage}%`;
+            }, 500);
+        }
     });
 }
 
 // Portfolio Data
-// Portfolio Data
 const portfolioData = [
     {
-        title: 'El-ROI Organization Website',
-        description: 'Responsive platform with interactive front-end and back-end for ministry outreach and community engagement.',
-        image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-        tags: ['HTML/CSS', 'JavaScript', 'PHP', 'MySQL'],
-        category: 'web ministry',
+        title: 'AI Health Assistant App',
+        description: 'This very good health related assistant which help for more reccomendation as the doctors',
+        image: 'img/AIPhoto.jpg',
+        tags: ['Flutter', 'Dart', 'Firebase', 'OPenAPI'],
+        category: 'mobile',
         links: {
             demo: '#',
             code: '#'
         }
     },
-    {
-        title: 'EL-ROI Ministry App',
-        description: 'Bible school app built with Kivy Python for accessible spiritual learning and community building.',
-        image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-        tags: ['Python', 'Kivy', 'Mobile', 'Firebase'],
-        category: 'mobile ministry',
+     {
+        title: '5+E-BOOK',
+        description: 'This very good health related assistant which help for more reccomendation as the doctors',
+        image: 'img/EBOOK.jpg',
+        tags: ['Flutter', 'Dart', 'HIVE'],
+        category: 'mobile',
         links: {
             demo: '#',
             code: '#'
         }
     },
-    {
-        title: 'Student Election System',
-        description: 'Secure and transparent election system with real-time results and admin dashboard.',
-        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-        tags: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap'],
-        category: 'web',
-        links: {
-            demo: '#',
-            code: '#'
-        }
-    },
-    {
-        title: 'Scientific Calculator',
-        description: 'Advanced calculator with scientific functions, graphing capabilities, and history tracking.',
-        image: 'https://images.unsplash.com/photo-1587145820266-a5951ee6f620?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-        tags: ['Python', 'Tkinter', 'Mathematics'],
+     {
+        title: 'Global Transilator App',
+        description: 'This very good global transilator that transilate any language to many language at once tab it may trnasilate many lnaguage at once',
+        image: 'img/Global.jpg',
+        tags: ['Flutter', 'Dart', 'Firebase', 'OPenAPI'],
         category: 'mobile',
         links: {
             demo: '#',
@@ -373,10 +460,10 @@ const portfolioData = [
         }
     },
     {
-        title: 'Bank Management System',
-        description: 'Comprehensive banking solution with user authentication, transactions, and admin panel.',
-        image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-        tags: ['Java', 'Swing', 'MySQL', 'OOP'],
+        title: 'Certificate-Management System',
+        description: 'Certificate production for the Kebele for Id,Marriage,Death,.',
+        image: '',
+        tags: ['PHP', 'HTML', 'CSS', 'JavaScript'],
         category: 'web',
         links: {
             demo: '#',
@@ -384,10 +471,77 @@ const portfolioData = [
         }
     },
     {
-        title: 'OroChat Real-time App',
-        description: 'Real-time chat application with groups, file sharing, and push notifications.',
-        image: 'https://images.unsplash.com/photo-1587563871167-1ee9c731aefb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-        tags: ['Flutter', 'Firebase', 'Dart', 'Real-time'],
+        title: 'Weather Forecast App',
+        description: 'Beautiful weather application with location-based forecasts and interactive maps.',
+        image: 'img/forecast.jpg',
+        tags: ['Flutter', 'API Integration', 'Google Maps'],
+        category: 'mobile',
+        links: {
+            demo: '#',
+            code: '#'
+        }
+    },
+    {
+        title: 'Orochat App',
+        description: 'OrochaApp for social realtime chat app  with data visualization.',
+        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+        tags: ['flutter', 'firebase',],
+        category: 'mobile',
+        links: {
+            demo: '#',
+            code: '#'
+        }
+    },
+    {
+        title: 'HOTSPOT_SCANNER',
+        description: 'Mobile application for  scanning mobile hospots and block the unperimmision use.',
+        image: 'img/scanner.jpg',
+        tags: ['Kotlin', 'flutter', 'firebase'],
+        category: 'mobile',
+        links: {
+            demo: '#',
+            code: '#'
+        }
+    },
+    {
+        title: 'Ethiopia Diaspora',
+        description: 'Which may contain many activity may connect doaspora and envestore in different development activity.',
+        image: 'img/diaspora.jpg',
+        tags: ['flutter', 'FASTAPI'],
+        category: 'mobile',
+        links: {
+            demo: '#',
+            code: '#'
+        }
+    },
+     {
+        title: 'Gebeyakoo',
+        description: 'World currency converter that support multple languages.',
+        image: 'img/gebeyakoo.jpg',
+        tags: ['flutter', 'firebase','API'],
+        category: 'mobile',
+        links: {
+            demo: '#',
+            code: '#'
+        }
+    },
+    {
+        title: 'Object Detector',
+        description: ' The flutter based mobile application that detect amy object real time application.',
+        image: 'img/object.png',
+        tags: ['flutter', 'Tensoflow','MKIT'],
+        category: 'mobile',
+        links: {
+            demo: '#',
+            code: '#'
+        }
+    },
+    
+     {
+        title: 'Reminder APP',
+        description: 'Student Alarm system that programme schedueler for any class or many purpose.',
+        image: 'img/ALARM.jpg',
+        tags: ['flutter', 'firebase'],
         category: 'mobile',
         links: {
             demo: '#',
@@ -400,6 +554,8 @@ const portfolioData = [
 function initializePortfolio() {
     const portfolioGrid = document.querySelector('.portfolio-grid');
     const filterBtns = document.querySelectorAll('.filter-btn');
+    
+    if (!portfolioGrid) return;
     
     // Populate portfolio grid
     function populatePortfolio(filter = 'all') {
@@ -446,6 +602,47 @@ function initializePortfolio() {
             </div>
         `).join('');
     }
+
+    // Initialize Innovation Stats Counter
+function initializeInnovationStats() {
+    const counters = document.querySelectorAll('.innovation-stats .stat-number');
+    
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-count'));
+        const duration = 2000;
+        const step = target / (duration / 16);
+        let current = 0;
+        
+        const timer = setInterval(() => {
+            current += step;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            counter.textContent = Math.floor(current);
+        }, 16);
+    });
+}
+
+// Add to your existing initialization
+document.addEventListener('DOMContentLoaded', () => {
+    // ... existing code ...
+    initializeInnovationStats();
+    
+    // Observe innovation section for animation
+    const innovationSection = document.querySelector('.innovation');
+    if (innovationSection) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    initializeInnovationStats();
+                }
+            });
+        }, { threshold: 0.3 });
+        
+        observer.observe(innovationSection);
+    }
+});
     
     // Filter functionality
     filterBtns.forEach(btn => {
@@ -471,92 +668,12 @@ function initializePortfolio() {
     // Initialize with all projects
     populatePortfolio();
 }
-// Gospel Steps Animation
-function initializeGospelSteps() {
-    const steps = document.querySelectorAll('.gospel-step');
-    let currentStep = 0;
-    
-    function animateSteps() {
-        steps.forEach(step => step.classList.remove('active'));
-        steps[currentStep].classList.add('active');
-        
-        currentStep = (currentStep + 1) % steps.length;
-    }
-    
-    // Animate steps every 3 seconds
-    setInterval(animateSteps, 3000);
-    
-    // Prayer button functionality
-    const prayerBtn = document.querySelector('.prayer-btn');
-    prayerBtn.addEventListener('click', () => {
-        const prayerText = `
-            Dear God,
-            
-            I know I'm a sinner and I need your forgiveness.
-            I believe Jesus died for my sins and rose from the dead.
-            I invite Jesus to come into my life as my Lord and Savior.
-            
-            Thank you for your grace and the gift of eternal life.
-            In Jesus' name, Amen.
-        `;
-        
-        alert('Prayer of Salvation:\n\n' + prayerText + '\n\nIf you prayed this prayer, welcome to the family of God!');
-    });
-}
-
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', initializeGospelSteps);
-
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', initializePortfolio);
-// Mission & Vision Interactive Elements
-function initializeMissionVision() {
-    // Animate counter numbers
-    const counters = document.querySelectorAll('.stat-number');
-    
-    counters.forEach(counter => {
-        const target = parseInt(counter.getAttribute('data-count'));
-        const duration = 2000;
-        const step = target / (duration / 16);
-        let current = 0;
-        
-        const timer = setInterval(() => {
-            current += step;
-            if (current >= target) {
-                current = target;
-                clearInterval(timer);
-            }
-            counter.textContent = Math.floor(current);
-        }, 16);
-    });
-    
-    // Add scroll animations for mission pillars
-    const pillars = document.querySelectorAll('.pillar');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.animation = 'pillarSlideIn 0.6s ease-out forwards';
-            }
-        });
-    }, { threshold: 0.3 });
-    
-    pillars.forEach(pillar => observer.observe(pillar));
-    
-    // Phase marker animations
-    const phases = document.querySelectorAll('.goal-phase');
-    
-    phases.forEach((phase, index) => {
-        phase.style.animationDelay = `${index * 0.2}s`;
-    });
-}
-
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', initializeMissionVision);
 
 // Contact Form Handling
 function initializeContactForm() {
     const contactForm = document.getElementById('contactForm');
+    
+    if (!contactForm) return;
     
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -574,10 +691,7 @@ function initializeContactForm() {
         
         setTimeout(() => {
             // Show success message
-            alert('Thank you for your message! I will get back to you soon.');
-            
-            // Reset form
-            contactForm.reset();
+            showSuccessMessage();
             
             // Reset button
             submitBtn.innerHTML = originalText;
@@ -585,72 +699,6 @@ function initializeContactForm() {
         }, 2000);
     });
 }
-
-// Text Animation for Home Section
-function initializeTextAnimation() {
-    const textWrapper = document.querySelector('.letters');
-    if (textWrapper) {
-        textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-        
-        anime.timeline({ loop: false })
-            .add({
-                targets: '.letter',
-                translateY: [100, 0],
-                translateZ: 0,
-                opacity: [0, 1],
-                easing: "easeOutExpo",
-                duration: 1400,
-                delay: (el, i) => 300 + 30 * i
-            });
-    }
-}
-
-// Intersection Observer for Animations
-function initializeIntersectionObserver() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                if (entry.target.classList.contains('home-stats')) {
-                    animateCounters();
-                }
-                if (entry.target.classList.contains('skills-graph')) {
-                    animateSkillGraphs();
-                }
-            }
-        });
-    }, observerOptions);
-    
-    // Observe elements
-    const statsSection = document.querySelector('.home-stats');
-    const skillsGraph = document.querySelector('.skills-graph');
-    
-    if (statsSection) observer.observe(statsSection);
-    if (skillsGraph) observer.observe(skillsGraph);
-}
-
-// Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    initializeSkills();
-    initializePortfolio();
-    initializeContactForm();
-    initializeTextAnimation();
-    initializeIntersectionObserver();
-    
-    // Add scroll reveal animations
-    const scrollRevealOptions = {
-        distance: '50px',
-        duration: 1000,
-        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-        interval: 200
-    };
-    
-    // Add any additional initialization here
-});
 
 // Contact Form Email Functionality
 function sendEmail(form) {
@@ -670,11 +718,8 @@ function sendEmail(form) {
         message: formData.get('message')
     };
     
-    // Simulate email sending (in production, use a service like EmailJS, Formspree, or your backend)
+    // Simulate email sending
     setTimeout(() => {
-        // Here you would typically send the data to your email service
-        // For demonstration, we'll simulate success
-        
         // Show success message
         showSuccessMessage();
         
@@ -682,23 +727,6 @@ function sendEmail(form) {
         submitBtn.classList.remove('loading');
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
-        
-        // In production, you would actually send the email here
-        // Example with EmailJS (you would need to set this up):
-        /*
-        emailjs.send('your_service_id', 'your_template_id', data)
-            .then(function(response) {
-                showSuccessMessage();
-                submitBtn.classList.remove('loading');
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }, function(error) {
-                alert('Sorry, there was an error sending your message. Please try again or email me directly at wedadiriba@gmail.com');
-                submitBtn.classList.remove('loading');
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            });
-        */
         
     }, 2000);
     
@@ -710,12 +738,14 @@ function showSuccessMessage() {
     const successMessage = document.getElementById('successMessage');
     const contactForm = document.getElementById('contactForm');
     
+    if (!successMessage || !contactForm) return;
+    
     // Hide form, show success message
     contactForm.style.opacity = '0';
     contactForm.style.visibility = 'hidden';
     successMessage.classList.add('show');
     
-    // You could also send the form data to your email here
+    // Send actual email using mailto
     sendToActualEmail();
 }
 
@@ -723,6 +753,8 @@ function resetForm() {
     const successMessage = document.getElementById('successMessage');
     const contactForm = document.getElementById('contactForm');
     const form = document.getElementById('contactForm');
+    
+    if (!successMessage || !contactForm || !form) return;
     
     // Show form, hide success message
     successMessage.classList.remove('show');
@@ -733,43 +765,32 @@ function resetForm() {
     form.reset();
 }
 
-// Function to actually send email (you need to implement this based on your preferred method)
+// Function to actually send email using mailto
 function sendToActualEmail() {
     const form = document.getElementById('contactForm');
+    if (!form) return;
+    
     const formData = new FormData(form);
     
     const data = {
         name: formData.get('name'),
         email: formData.get('email'),
         subject: formData.get('subject'),
-        message: formData.get('message'),
-        timestamp: new Date().toISOString()
+        message: formData.get('message')
     };
     
-    // Method 1: Using mailto link (opens user's email client)
+    // Create mailto link
     const mailtoLink = `mailto:wedadiriba@gmail.com?subject=Portfolio Contact: ${encodeURIComponent(data.subject)}&body=Name: ${encodeURIComponent(data.name)}%0AEmail: ${encodeURIComponent(data.email)}%0A%0AMessage:%0A${encodeURIComponent(data.message)}%0A%0ASent from your portfolio website`;
     
-    // Method 2: Using a service like EmailJS (recommended)
-    // You would need to set up EmailJS account and replace with your credentials
-    /*
-    emailjs.init("your_public_key");
-    emailjs.send("your_service_id", "your_template_id", data)
-        .then(function(response) {
-            console.log("Email sent successfully!", response);
-        }, function(error) {
-            console.log("Failed to send email:", error);
-            // Fallback to mailto
-            window.location.href = mailtoLink;
-        });
-    */
-    
-    // For now, using mailto as fallback
+    // Open email client
     window.location.href = mailtoLink;
 }
 
 // Initialize contact form interactions
-function initializeContactForm() {
+function initializeContactFormInteractions() {
     const form = document.getElementById('contactForm');
+    
+    if (!form) return;
     
     // Add real-time validation
     const inputs = form.querySelectorAll('input, textarea, select');
@@ -797,13 +818,185 @@ function initializeContactForm() {
     });
 }
 
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', initializeContactForm);
+// Text Animation for Home Section
+function initializeTextAnimation() {
+    const textWrapper = document.querySelector('.letters');
+    if (textWrapper) {
+        textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+        
+        // Simple animation without anime.js
+        const letters = textWrapper.querySelectorAll('.letter');
+        letters.forEach((letter, index) => {
+            letter.style.opacity = '0';
+            letter.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                letter.style.transition = 'all 0.5s ease';
+                letter.style.opacity = '1';
+                letter.style.transform = 'translateY(0)';
+            }, 100 + (index * 50));
+        });
+    }
+}
+
+// Animate counters
+function animateCounters() {
+    const counters = document.querySelectorAll('.stat-number');
+    
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-count'));
+        const duration = 2000;
+        const step = target / (duration / 16);
+        let current = 0;
+        
+        const timer = setInterval(() => {
+            current += step;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            counter.textContent = Math.floor(current);
+        }, 16);
+    });
+}
+
+// Intersection Observer for Animations
+function initializeIntersectionObserver() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                if (entry.target.classList.contains('home-stats')) {
+                    animateCounters();
+                }
+                if (entry.target.classList.contains('skills-graph')) {
+                    animateSkillGraphs();
+                }
+                if (entry.target.classList.contains('service-card')) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            }
+        });
+    }, observerOptions);
+    
+    // Observe elements
+    const elementsToObserve = document.querySelectorAll(
+        '.home-stats, .skills-graph, .service-card, .portfolio-item, .education-card'
+    );
+    
+    elementsToObserve.forEach(element => {
+        observer.observe(element);
+    });
+}
+
+// Testimonials Slider
+function initializeTestimonials() {
+    const testimonialCards = document.querySelectorAll('.testimonial-card');
+    const prevBtn = document.querySelector('.slider-prev');
+    const nextBtn = document.querySelector('.slider-next');
+    
+    if (testimonialCards.length === 0) return;
+    
+    let currentSlide = 0;
+    
+    function showSlide(index) {
+        testimonialCards.forEach(card => card.classList.remove('active'));
+        testimonialCards[index].classList.add('active');
+    }
+    
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % testimonialCards.length;
+        showSlide(currentSlide);
+    }
+    
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + testimonialCards.length) % testimonialCards.length;
+        showSlide(currentSlide);
+    }
+    
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    
+    // Auto-advance slides
+    setInterval(nextSlide, 5000);
+}
+
+// Blog interactions
+function initializeBlog() {
+    const blogCards = document.querySelectorAll('.blog-card');
+    
+    blogCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-10px)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0)';
+        });
+    });
+}
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    initializeSkills();
+    initializePortfolio();
+    initializeContactForm();
+    initializeContactFormInteractions();
+    initializeTextAnimation();
+    initializeIntersectionObserver();
+    initializeTestimonials();
+    initializeBlog();
+    
+    // Animate skill graphs on page load
+    setTimeout(animateSkillGraphs, 1000);
+});
 
 // Handle page visibility changes
 document.addEventListener('visibilitychange', () => {
     if (!document.hidden) {
-        // Page became visible again
-        particlesJS('particles-js', 'start');
+        // Page became visible again - restart animations if needed
+        const particles = document.getElementById('particles-js');
+        if (particles) {
+            // Reinitialize particles if they stopped
+            particlesJS('particles-js', 'start');
+        }
     }
+});
+
+// Error handling for missing elements
+window.addEventListener('error', (e) => {
+    console.log('Script error:', e.message);
+});
+
+// Add resize handler for responsive adjustments
+window.addEventListener('resize', () => {
+    // Recalculate any layout-dependent animations
+    if (window.innerWidth < 768) {
+        // Mobile-specific adjustments
+        document.body.classList.add('mobile-view');
+    } else {
+        document.body.classList.remove('mobile-view');
+    }
+});
+
+// Keyboard navigation support
+document.addEventListener('keydown', (e) => {
+    // ESC key closes mobile menu
+    if (e.key === 'Escape' && navList && navList.classList.contains('active')) {
+        menuToggle.classList.remove('active');
+        navList.classList.remove('active');
+    }
+    
+    // Tab key navigation improvements
+    if (e.key === 'Tab') {
+        document.body.classList.add('keyboard-navigation');
+    }
+});
+
+// Remove keyboard navigation class when mouse is used
+document.addEventListener('mousedown', () => {
+    document.body.classList.remove('keyboard-navigation');
 });
