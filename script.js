@@ -439,9 +439,9 @@ const portfolioData = [
     },
      {
         title: '5+E-BOOK',
-        description: 'This very good health related assistant which help for more reccomendation as the doctors',
+        description: 'This E-Book project I have done for many clients ,Hardy copy to digital book',
         image: 'img/EBOOK.jpg',
-        tags: ['Flutter', 'Dart', 'HIVE'],
+        tags: ['Flutter', 'Dart', 'HIVE','SQlite'],
         category: 'mobile',
         links: {
             demo: '#',
