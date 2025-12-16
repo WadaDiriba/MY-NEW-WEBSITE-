@@ -272,7 +272,10 @@ const skillsData = {
         { name: 'MySQL', percentage: 80 },
         { name: 'MongoDB', percentage: 70 },
         { name: 'REST APIs', percentage: 85 },
-        { name: 'GraphQL', percentage: 65 }
+        { name: 'GraphQL', percentage: 65 },
+         { name: 'PHP', percentage: 65 },
+         { name: 'Java', percentage: 65 },
+          { name: 'C++', percentage: 65 },
     ],
     tools: [
         { name: 'Git', percentage: 85 },
@@ -281,7 +284,10 @@ const skillsData = {
         { name: 'VS Code', percentage: 90 },
         { name: 'Postman', percentage: 80 },
         { name: 'Android Studio', percentage: 85 },
-        { name: 'Xcode', percentage: 65 }
+        { name: 'Xcode', percentage: 65 },
+          { name: 'Ardinuo', percentage: 65 },
+            { name: 'JetBeans', percentage: 65 },
+
     ]
 };
 // Animate circular progress bars
