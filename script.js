@@ -87,6 +87,25 @@ const CONFIG = {
             category: 'web',
             links: { demo: '#', code: '#' }
         },
+         {
+            title: 'Source of Life Theological College',
+            description: 'This project What I done from my client as Did it as Project Manager',
+            image: '',
+            tags: ['React', 'CSS', 'Node js'],
+            category: 'web',
+            links: { demo: 'http://sourceoflifecollege.com/', }
+        },
+        {
+            title: 'Ethiopian Berhana Kiristoos Church',
+            description: 'This project What I done for my client very good website.responsive ',
+            image: '',
+            tags: ['React', 'CSS', 'Node js'],
+            category: 'web',
+            links: { demo: 'Coming Soon'}
+        },
+
+
+        
         {
             title: 'Weather Forecast App',
             description: 'Location-based weather application',
