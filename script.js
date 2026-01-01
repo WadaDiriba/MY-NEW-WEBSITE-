@@ -69,7 +69,9 @@ const CONFIG = {
             image: 'img/EBOOK.jpg',
             tags: ['Flutter', 'Dart', 'HIVE', 'SQLite'],
             category: 'mobile',
-            links: { demo: '#', code: '#' }
+            links: { demo: '#', code: '#' },
+            download: 'apk/app-release.apk',
+            download: 'apk/EBKC.apk',
         },
         {
             title: 'Global Translator App',
@@ -78,6 +80,14 @@ const CONFIG = {
             tags: ['Flutter', 'Firebase', 'API'],
             category: 'mobile',
             links: { demo: '#', code: '#' }
+        },
+        {
+            title: 'WGFA OFFICAL WEBSITE',
+            description: 'WEARING GENERATION FROM ADDICTION CHARITY NON-PROFIT ORGANIZATION',
+            image: '',
+            tags: ['React', 'CSS', 'Javascript'],
+            category: 'web',
+            links: { demo: 'https://wearing-generation-from-addiction-c.vercel.app/', code: 'https://github.com/WadaDiriba/WEARING-GENERATION-FROM-ADDICTION-CHARITY' }
         },
         {
             title: 'Certificate Management System',
